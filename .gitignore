@@ -1,0 +1,40 @@
+# Virtual environment
+/venv/
+
+# Python bytecode files
+*.pyc
+__pycache__/
+
+# Django settings
+*.sqlite3
+/db.sqlite3
+/media/
+*.log
+
+# Environment variables
+.env
+
+# Angular build files
+/frontend/dist/
+/frontend/out-tsc/
+
+# Angular dependencies
+/frontend/node_modules/
+
+/frontend/.angular/
+
+# Windows
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# Log files
+*.log
+
+# Compiled output
+*.out
+*.o
+
+# Temporary files
+*.tmp
