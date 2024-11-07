@@ -48,3 +48,4 @@ export const environment = {
 install pip and python: https://www.w3schools.com/django/django_getstarted.php
 pip installation: https://pip.pypa.io/en/stable/installation/
 python installation: https://www.python.org/
+Setup of auth system: https://www.youtube.com/watch?v=k5Xf8EJbSjo&list=PLMya0JgwP7RyqmUa3pg_LknK-12NQIGqB&ab_channel=OSTechHelp
