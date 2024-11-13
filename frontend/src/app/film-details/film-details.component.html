@@ -11,19 +11,19 @@
       <p><em>Published on: {{ review.date_created }}</em></p>
     </div>
   
-    <div *ngIf="isLoggedIn">
-      <h3>Add a Review</h3>
-      <form (ngSubmit)="submitReview()">
-        <label for="rating">Rating:</label>
-        <select [(ngModel)]="reviewData.rating" name="rating" required>
-          <option *ngFor="let star of stars" [value]="star">{{ star }} Star(s)</option>
-        </select>
-  
-        <label for="description">Description:</label>
-        <textarea [(ngModel)]="reviewData.description" name="description" required></textarea>
-  
-        <button type="submit">Submit Review</button>
-      </form>
+    <div *ngIf="isLoggedIn && !hasMaxReviews(film)">
+        <h3>Add a Review</h3>
+        <form (ngSubmit)="submitReview()">
+            <label for="rating">Rating:</label>
+            <select [(ngModel)]="reviewData.rating" name="rating" required>
+                <option *ngFor="let star of [1, 3, 5]" [value]="star">{{ star }} Star(s)</option>
+            </select>
+
+            <label for="description">Description:</label>
+            <textarea [(ngModel)]="reviewData.description" name="description" required></textarea>
+
+            <button type="submit">Submit Review</button>
+        </form>
     </div>
-  </div>
+</div>
   

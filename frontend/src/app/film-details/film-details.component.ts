@@ -20,13 +20,23 @@ export class FilmDetailsComponent implements OnInit {
 
   constructor(private publicService: PublicService, private route: ActivatedRoute) {}
 
+  orderReviews(reviews: any[]): any[] {
+    return reviews.slice().sort((a, b) => b.rating - a.rating);
+  }
+
   ngOnInit(): void {
     const filmId = this.route.snapshot.params['id'];
     this.publicService.getFilmDetails(filmId).subscribe(data => {
       this.film = data;
+      this.film.reviews = this.orderReviews(this.film.reviews);
       console.log('Film data:', this.film);
       console.log('Poster image URL:', this.film.poster_image);
     });
+  }
+
+  hasMaxReviews(film: any): boolean {
+    const existingRatings = film.reviews.map((review: any) => review.rating);
+    return existingRatings.includes(1) && existingRatings.includes(3) && existingRatings.includes(5);
   }
 
   submitReview(): void {
@@ -38,7 +48,7 @@ export class FilmDetailsComponent implements OnInit {
   
     this.publicService.addReview(filmId, this.reviewData).subscribe({
       next: (review) => {
-        this.film.reviews.push(review);
+        this.film.reviews = this.orderReviews([...this.film.reviews, review]);
         this.reviewData = { rating: null, description: '' };
       },
       error: (err) => console.error('Error submitting review:', err)
