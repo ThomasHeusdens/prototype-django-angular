@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -8,30 +9,28 @@ import { first } from 'rxjs/operators';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'] 
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
-  myForm!: FormGroup;
+export class LoginComponent {
+  myForm: FormGroup = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });
 
-  constructor(private authService: AuthService) {}
-
-  ngOnInit(): void {
-    this.myForm = new FormGroup({
-      username: new FormControl(''),
-      password: new FormControl('')
-    });
-  }
-
-  get f() {
-    return this.myForm.controls;
-  }
+  constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-    this.authService.login(this.f['username'].value, this.f['password'].value).pipe(first()).subscribe(
-      data => {
-        console.log(data);
-      }
-    );
-    console.warn(this.myForm.value);
+    this.authService.login(this.myForm.value.username, this.myForm.value.password)
+      .pipe(first())
+      .subscribe(data => {
+        console.log(data)
+        this.router.navigate(['/']).then(() => {
+          window.location.reload();
+        });
+      });
+  }
+
+  goToRegister(){
+    this.router.navigate(['/register']);
   }
 }

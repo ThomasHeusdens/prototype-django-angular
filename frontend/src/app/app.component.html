@@ -1,3 +1,5 @@
 <h1>{{ title }}</h1>
-<button type="button" (click)="logout()">Logout</button>
-<router-outlet><router-outlet />
+<button *ngIf="!isLoggedIn" type="button" (click)="goToLogin()">Login</button>
+<button *ngIf="isLoggedIn" type="button" (click)="logout()">Logout</button>
+<button *ngIf="isLoggedIn" type="button" (click)="goToProfile()">Profile</button>
+<router-outlet></router-outlet>

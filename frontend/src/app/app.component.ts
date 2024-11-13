@@ -1,23 +1,26 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet, Router } from '@angular/router';
 import { PublicService } from './services/public.service';
 import { AuthService } from "./services/auth.service"
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'This is my website for Expert lab';
+  title = 'CineCritique';
+  isLoggedIn: boolean = false;
   msg: any;
-  constructor(private pService: PublicService, private authService: AuthService) {
+  constructor(private pService: PublicService, private authService: AuthService, private router: Router) {
   }
 
   ngOnInit(): void {
     this.showMessage();
+    this.isLoggedIn = this.authService.isLoggedIn();
   }
 
   showMessage() {
@@ -28,5 +31,13 @@ export class AppComponent {
   }
   logout() {
     this.authService.logout();
+    window.location.reload();
+    this.isLoggedIn = false;
+  }
+  goToLogin() {
+    this.router.navigate(['/login']);
+  }
+  goToProfile() {
+    this.router.navigate(['/profile']);
   }
 }
