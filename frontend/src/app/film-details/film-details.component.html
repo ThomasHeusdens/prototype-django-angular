@@ -1,29 +1,36 @@
-<div *ngIf="film">
-    <h1>{{ film.title }}</h1>
-    <img *ngIf="film.poster_image" [src]="film.poster_image" alt="{{ film.title }} poster">
-    <p>{{ film.description }}</p>
-    <p>{{ film.date_published }}</p>
-  
-    <h2>Reviews</h2>
-    <div *ngFor="let review of film.reviews">
-      <p><strong>{{ review.user }}</strong> - {{ review.rating }} Stars</p>
-      <p>{{ review.description }}</p>
-      <p><em>Published on: {{ review.date_created }}</em></p>
+<div *ngIf="film" class="film-container">
+    <div class="film-details">
+        <h1>{{ film.title }}</h1>
+        <p>{{ film.description }}</p>
+        <p class="date">{{ film.date_published }}</p>
     </div>
-  
-    <div *ngIf="isLoggedIn && !hasMaxReviews(film)">
-        <h3>Add a Review</h3>
-        <form (ngSubmit)="submitReview()">
+    <div class="reviews">
+        <h2>Reviews</h2>
+        <div class="review-cards-container">
+            <div *ngFor="let review of film.reviews" class="review-card">
+                <p><strong>{{ review.user }}</strong> - <span class="rating">★</span> {{ review.rating }}</p>
+                <p><em>{{ review.date_created }}</em></p>
+                <p>{{ review.description }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="isLoggedIn && !hasMaxReviews(film)" class="review-form">
+    <h3>Add a Review</h3>
+    <form (ngSubmit)="submitReview()">
+        <div>
             <label for="rating">Rating:</label>
             <select [(ngModel)]="reviewData.rating" name="rating" required>
                 <option *ngFor="let star of [1, 3, 5]" [value]="star">{{ star }} Star(s)</option>
             </select>
+        </div>
 
+        <div>
             <label for="description">Description:</label>
             <textarea [(ngModel)]="reviewData.description" name="description" required></textarea>
+        </div>
 
-            <button type="submit">Submit Review</button>
-        </form>
-    </div>
+        <button type="submit">Submit Review</button>
+    </form>
 </div>
-  

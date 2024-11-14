@@ -5,9 +5,13 @@ import { AuthGuard } from './services/auth.guard';
 import { RegisterComponent } from './register/register.component'
 import { FilmListComponent } from './film-list/film-list.component';
 import { FilmDetailsComponent } from './film-details/film-details.component';
+import { HomeComponent } from './home/home.component';
 
 
 export const routes: Routes = [
+    { 
+        path: '', component: HomeComponent 
+    },
     {
         path: 'login', component: LoginComponent
     },

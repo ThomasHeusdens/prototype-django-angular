@@ -1,8 +1,10 @@
 <div class="nav">
-    <div class="title">
-        <img src="../assets/logo.png" alt="logo" class="logo">
-    </div>
-    <div class="rightnav">
+        <button class="text-button" 
+                [routerLink]="''" 
+                routerLinkActive="active" 
+                [routerLinkActiveOptions]="{exact: true}">
+            Home
+        </button>
         <button class="text-button" 
                 [routerLink]="'films'" 
                 routerLinkActive="active" 
@@ -25,6 +27,5 @@
                 (click)="logout()">
             Logout
         </button>
-    </div>
 </div>
 <router-outlet></router-outlet>

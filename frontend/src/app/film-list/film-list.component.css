@@ -22,10 +22,11 @@ img {
 
 .film-details {
     position: absolute;
-    bottom: 0;
+    bottom: 4px;
     left: 0;
     right: 0;
     padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
     color: white;
     border-radius: 0 0 8px 8px;
 }
