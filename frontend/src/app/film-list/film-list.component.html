@@ -1,7 +1,8 @@
-<h1>Films</h1>
-<div *ngFor="let film of films">
-  <img *ngIf="film.poster_image" [src]="film.poster_image" alt="{{ film.title }} poster">
-  <h3><a [routerLink]="['/films', film.id]">{{ film.title }}</a></h3>
-  <p>{{ film.description }}</p>
+<div class="films">
+  <div *ngFor="let film of films" class="film-card">
+    <a [routerLink]="['/films', film.id]"><img *ngIf="film.poster_image" [src]="film.poster_image" alt="{{ film.title }} poster"></a>
+    <div class="film-details">
+      <h3>{{ film.title }}</h3>
+    </div>
+  </div>
 </div>
-

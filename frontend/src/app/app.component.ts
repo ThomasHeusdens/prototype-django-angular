@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet, Router } from '@angular/router';
 import { PublicService } from './services/public.service';
 import { AuthService } from "./services/auth.service"
+import { RouterModule } from '@angular/router'; 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, RouterModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'CineCritique';
   isLoggedIn: boolean = false;
   msg: any;
   constructor(private pService: PublicService, private authService: AuthService, private router: Router) {
@@ -33,11 +33,5 @@ export class AppComponent {
     this.authService.logout();
     window.location.reload();
     this.isLoggedIn = false;
-  }
-  goToLogin() {
-    this.router.navigate(['/login']);
-  }
-  goToProfile() {
-    this.router.navigate(['/profile']);
   }
 }
