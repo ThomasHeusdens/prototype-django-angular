@@ -6,7 +6,8 @@ img {
 }
 
 .films {
-    margin: 0 192px 50px 192px;
+    background-color: #01132b;
+    padding: 45px 192px 50px 192px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

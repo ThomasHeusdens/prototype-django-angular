@@ -3,7 +3,7 @@ from .models import Film, Review
 
 class ReviewSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)
-    date_created = serializers.DateTimeField(read_only=True)
+    date_created = serializers.DateTimeField(read_only=True, format='%Y-%m-%d')
 
     def validate_rating(self, value):
         if value not in [1, 3, 5]:

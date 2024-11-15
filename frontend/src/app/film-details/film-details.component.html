@@ -1,36 +1,67 @@
-<div *ngIf="film" class="film-container">
-    <div class="film-details">
-        <h1>{{ film.title }}</h1>
-        <p>{{ film.description }}</p>
-        <p class="date">{{ film.date_published }}</p>
-    </div>
-    <div class="reviews">
-        <h2>Reviews</h2>
-        <div class="review-cards-container">
-            <div *ngFor="let review of film.reviews" class="review-card">
-                <p><strong>{{ review.user }}</strong> - <span class="rating">★</span> {{ review.rating }}</p>
-                <p><em>{{ review.date_created }}</em></p>
-                <p>{{ review.description }}</p>
+<body>
+    <div *ngIf="film" class="film-container" [style.background-image]="'url(' + film.poster_image + ')'">
+        <div class="film-details">
+            <h1>{{ film.title }}</h1>
+            <p>{{ film.description }}</p>
+            <p class="date">{{ film.date_published }}</p>
+        </div>
+        <div class="reviews">
+            <h2>Reviews</h2>
+            <div class="review-cards-container">
+                <div *ngFor="let star of [1, 3, 5]" class="review-card">
+                  <ng-container *ngIf="hasReviewForRating(film, star); else noReviewPlaceholder">
+                    <p><strong>{{ getReviewForRating(film, star)?.user }}</strong> - <span class="rating">★</span> {{ getReviewForRating(film, star)?.rating }}</p>
+                    <p><em>{{ getReviewForRating(film, star)?.date_created }}</em></p>
+                    <p>{{ getReviewForRating(film, star)?.description }}</p>
+                  </ng-container>
+                  <ng-template #noReviewPlaceholder>
+                    <p>There's no {{ star }} star review for this film. Add it yourself by logging in and filling in the form by clicking below.</p>
+                  </ng-template>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div *ngIf="isLoggedIn && !hasMaxReviews(film)" class="review-form">
-    <h3>Add a Review</h3>
-    <form (ngSubmit)="submitReview()">
-        <div>
-            <label for="rating">Rating:</label>
-            <select [(ngModel)]="reviewData.rating" name="rating" required>
+    <div class="button-container">
+        <button (click)="showReviewForm = true" class="add-review-btn">
+          Add Review
+        </button>
+    </div>
+    <div *ngIf="showReviewForm" class="modal">
+        <div class="modal-content">
+          <span class="close-button" (click)="showReviewForm = false">&times;</span>
+          <h3>Add a Review</h3>  
+          
+          <form *ngIf="isLoggedIn && !hasMaxReviews(film)" (ngSubmit)="submitReview()">
+            <div>
+              <label for="rating">Rating:</label>
+              <select [(ngModel)]="reviewData.rating" name="rating" required>
                 <option *ngFor="let star of [1, 3, 5]" [value]="star">{{ star }} Star(s)</option>
-            </select>
+              </select>
+            </div>
+      
+            <div>
+              <label for="description">Description:</label>
+              <textarea [(ngModel)]="reviewData.description" name="description" required></textarea>
+            </div>
+      
+            <button type="submit">Submit Review</button>
+          </form>
+      
+          <div *ngIf="!isLoggedIn" class="isNotLoggedIn">
+            <p>You need to be logged in to add a review.</p>
+          </div>
+      
+          <div *ngIf="isLoggedIn && hasMaxReviews(film)" class="hasMaxReview">
+            <p>This film already has all the reviews it needs.</p>
+          </div>
         </div>
-
-        <div>
-            <label for="description">Description:</label>
-            <textarea [(ngModel)]="reviewData.description" name="description" required></textarea>
+    </div>
+    <div class="recommendedFilms">
+        <div class="random-films">
+            <div *ngFor="let film of randomFilms" class="film-card">
+              <a [routerLink]="['/films', film.id]"><img *ngIf="film.poster_image" [src]="film.poster_image" alt="{{ film.title }} poster"></a>
+              <div class="text-div"><h3>{{ film.title }}</h3></div>
+            </div>
         </div>
-
-        <button type="submit">Submit Review</button>
-    </form>
-</div>
+    </div>
+</body> 

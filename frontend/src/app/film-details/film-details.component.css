@@ -1,3 +1,9 @@
+body {
+    margin: 0;
+    padding: 45px 0 0 0;
+    background-color: #01132b;
+}
+
 img {
     width: 150px;
     height: auto;
@@ -9,6 +15,37 @@ img {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+}
+
+.film-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(7px);
+    z-index: 1;
+}
+
+.film-details,
+.reviews {
+    position: relative;
+    z-index: 2; 
+}
+
+
+.film-details h1, .film-details p, .reviews h2{
+    color: white;
 }
 
 .film-details h1 {
@@ -36,6 +73,19 @@ img {
     display: flex;
     justify-content: space-between; 
     gap: 20px; 
+}
+
+.review-card p:first-child{
+    margin: 0;
+}
+
+.review-card p:nth-child(2){
+    margin-top: 0;
+    font-size: 12px;
+}
+
+.review-card p:nth-child(3){
+    margin-bottom: 0;
 }
 
 .review-card {
@@ -81,20 +131,143 @@ img {
     resize: vertical;
 }
 
-.review-form button {
+.modal button {
+    margin-top: 20px;
     padding: 10px 20px;
-    background: #007bff;
-    color: white;
-    border: none;
+    background: #ffcf1a;
+    color: black;
     border-radius: 4px;
+    width: 100%;
     cursor: pointer;
+    border: black solid 1px;
 }
 
-.review-form button:hover {
-    background: #0056b3;
+.modal button:hover {
+    background: white;
+    border: black solid 1px;
 }
 
 .rating {
     color: gold;
     font-size: 1.2em;
+}
+
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    border-radius: 8px;
+}
+
+.modal h3{
+    margin-top: 0;
+}
+
+.close-button {
+    transform: translateY(-11px);
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin: 30px 192px;
+}
+
+.add-review-btn {
+    background-color: #ffcf1a;
+    border: solid black 1px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 100%;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+}
+
+.add-review-btn:hover {
+    cursor: pointer;
+    background-color: white;
+    border: solid white 1px;
+    transition: 0.4s;
+}
+
+.recommendedFilms{
+    margin: 0 192px;
+    background-color: #102037;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding: 20px;
+}
+
+.random-films {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.recommendedFilms h2 {
+    text-align: center;
+    color: white;
+    margin-top: 0;
+}
+
+.film-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.film-card:hover{
+    transform: translateY(-5px);
+}
+
+.film-card h3{
+    color: white;
+}
+
+.text-div{
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0));
+    border-radius: 8px;
+    text-align: center;
+}
+
+.film-card img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+form div:first-child{
+    margin-bottom: 20px;
 }
