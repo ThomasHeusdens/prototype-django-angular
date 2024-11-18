@@ -1,0 +1,25 @@
+.profile-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100vh - 116.6px);
+    font-family: 'Roboto', sans-serif;
+    background: radial-gradient(
+        circle,
+        #01132b 20%,  
+        #102037 40%,  
+        #1b2838 100% 
+    );
+}
+
+.profile-card{
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+}

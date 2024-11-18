@@ -134,17 +134,16 @@ img {
 .modal button {
     margin-top: 20px;
     padding: 10px 20px;
-    background: #ffcf1a;
-    color: black;
+    background: #007bff;
+    color: white;
+    border: none;
     border-radius: 4px;
     width: 100%;
     cursor: pointer;
-    border: black solid 1px;
 }
 
 .modal button:hover {
-    background: white;
-    border: black solid 1px;
+    background: #0056b3;
 }
 
 .rating {
@@ -200,8 +199,9 @@ img {
 }
 
 .add-review-btn {
-    background-color: #ffcf1a;
-    border: solid black 1px;
+    background-color: #007bff;
+    color: white;
+    border: none;
     padding: 10px 15px;
     border-radius: 8px;
     width: 100%;
@@ -211,8 +211,7 @@ img {
 
 .add-review-btn:hover {
     cursor: pointer;
-    background-color: white;
-    border: solid white 1px;
+    background-color: #0056b3;
     transition: 0.4s;
 }
 

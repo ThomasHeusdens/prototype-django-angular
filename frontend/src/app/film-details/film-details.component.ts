@@ -83,7 +83,7 @@ export class FilmDetailsComponent implements OnInit {
         this.film.reviews = this.orderReviews([...this.film.reviews, review]);
         this.reviewData = { rating: null, description: '' };
       },
-      error: (err) => console.error('Error submitting review:', err)
+      error: (err) => alert(err.error.error)
     });
   }
 }
